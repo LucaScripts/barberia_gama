@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4Ij4KICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjI0IiByPSIyNCIgZmlsbD0iIzBlMGUwZSIvPgogIDxwYXRoIGZpbGw9IiNDODk2MkUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyLDEyKSIgZD0iTTcgMnYxLjVjMCAuODMuNjcgMS41IDEuNSAxLjVTMTAgNC4zMyAxMCAzLjVWMmg0djEuNWMwIC44My42NyAxLjUgMS41IDEuNVMxNyA0LjMzIDE3IDMuNVYyaDFhMiAyIDAgMCAxIDIgMnYxNmEyIDIgMCAwIDEtMiAySDZhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoMXptNSA1Yy0zLjMxIDAtNiAyLjY5LTYgNnMyLjY5IDYgNiA2IDYtMi42OSA2LTYtMi42OS02LTYtNnptMCAyYzIuMjEgMCA0IDEuNzkgNCA0cy0xLjc5IDQtNCA0LTQtMS43OS00LTQgMS43OS00IDQtNHptLjUgMkgxMXYzbDIuNiAxLjU2LjcyLTEuMTgtMi4zMi0xLjM4VjExeiIvPgo8L3N2Zz4=">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbearia Gama — Painel Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8962E;
+    --gold-light: #E8B84B;
+    --gold-dim: rgba(200,150,46,0.12);
+    --bg: #0e0e0e;
+    --bg2: #161616;
+    --bg3: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --border-gold: rgba(200,150,46,0.35);
+    --text: #f0ece4;
+    --text2: #9a9490;
+    --text3: #625f5a;
+    --success: #4caf82;
+    --danger: #e05050;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* LOGIN */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(ellipse at center, #1a1408 0%, #0e0e0e 70%);
+  }
+
+  .login-card {
+    background: var(--bg2);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 40px 32px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+
+  .login-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .login-icon svg { width: 28px; height: 28px; fill: #0e0e0e; }
+
+  .login-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .login-sub {
+    font-size: 13px;
+    color: var(--text3);
+    margin-bottom: 28px;
+  }
+
+  .login-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+  }
+
+  .login-input::placeholder { letter-spacing: 1px; color: var(--text3); }
+  .login-input:focus { border-color: var(--gold); }
+
+  .login-input-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .login-input-wrap .login-input {
+    margin-bottom: 0;
+    padding-right: 46px;
+  }
+
+  .toggle-pass {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text3);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .toggle-pass:hover { color: var(--gold); }
+  .toggle-pass svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .login-btn {
+    width: 100%;
+    background: var(--gold);
+    color: #0e0e0e;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .login-btn:hover { background: var(--gold-light); }
+
+  .login-error {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-icon svg { width: 18px; height: 18px; fill: #0e0e0e; }
+
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .logo-text span { color: var(--gold); }
+
+  .admin-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid var(--border-gold);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .logout-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text3);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logout-btn:hover { border-color: var(--danger); color: var(--danger); }
+  .logout-btn svg { width: 13px; height: 13px; fill: currentColor; }
+
+  /* CONTAINER */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* DATE NAV */
+  .date-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .date-nav-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    flex: 1;
+  }
+
+  .date-nav-title span { color: var(--gold); }
+
+  .date-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .date-btn:hover { border-color: var(--border-gold); color: var(--gold); }
+  .date-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+  .today-btn {
+    background: var(--gold-dim);
+    border: 1px solid var(--border-gold);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+
+  .today-btn:hover { background: var(--gold); color: #0e0e0e; }
+
+  .date-input {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .date-input:focus { border-color: var(--gold); }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* APPOINTMENTS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    color: var(--text2);
+  }
+
+  .count-badge {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .appt-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .appt-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+
+  .appt-card.done::before { background: var(--success); }
+  .appt-card.cancelled::before { background: var(--danger); }
+
+  .appt-card:hover { border-color: var(--border-gold); }
+
+  .appt-time {
+    text-align: center;
+  }
+
+  .appt-time-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .appt-time-dur {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  .appt-time-end {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 2px;
+    opacity: 0.7;
+  }
+
+  .appt-info { flex: 1; }
+
+  .appt-client {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .appt-service {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+
+  .appt-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .appt-meta-item {
+    font-size: 12px;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .appt-meta-item svg { width: 12px; height: 12px; fill: var(--text3); }
+
+  .appt-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .appt-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .appt-code {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .appt-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .appt-action-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .appt-action-btn.done-btn { color: var(--success); border-color: rgba(76,175,130,0.3); }
+  .appt-action-btn.done-btn:hover { background: rgba(76,175,130,0.1); }
+  .appt-action-btn.cancel-btn { color: var(--danger); border-color: rgba(224,80,80,0.3); }
+  .appt-action-btn.cancel-btn:hover { background: rgba(224,80,80,0.1); }
+
+  .status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .status-confirmado { background: var(--gold-dim); color: var(--gold-light); border: 1px solid var(--border-gold); }
+  .status-concluido { background: rgba(76,175,130,0.12); color: var(--success); border: 1px solid rgba(76,175,130,0.3); }
+  .status-cancelado { background: rgba(224,80,80,0.1); color: var(--danger); border: 1px solid rgba(224,80,80,0.3); }
+
+  /* EMPTY */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+
+  .empty-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    color: var(--text2);
+  }
+
+  .empty-sub { font-size: 14px; }
+
+  /* LOADING */
+  .loading-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+    font-size: 14px;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+  }
+
+  /* WHATSAPP */
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(37,211,102,0.1);
+    border: 1px solid rgba(37,211,102,0.3);
+    color: #25D366;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .wa-btn:hover { background: rgba(37,211,102,0.2); }
+  .wa-btn svg { width: 12px; height: 12px; fill: #25D366; }
+
+  /* FEEDBACK MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .modal-card {
+    background: var(--bg2);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 400px;
+    animation: slideUp 0.25s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(76,175,130,0.15);
+    border: 2px solid var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .modal-icon svg { width: 24px; height: 24px; fill: var(--success); }
+
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    color: var(--text3);
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal-client {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .modal-client strong { color: var(--text); }
+
+  .modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-btn-feedback {
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .modal-btn-feedback:hover { background: #22c55e; }
+  .modal-btn-feedback svg { width: 18px; height: 18px; fill: #fff; }
+
+  .modal-btn-skip {
+    background: transparent;
+    color: var(--text3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .modal-btn-skip:hover { border-color: var(--border-gold); color: var(--text); }
+
+  /* NEXT APPOINTMENTS SECTION */
+  .next-section {
+    margin-top: 32px;
+  }
+
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 10px 16px 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text3);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tab-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* AGENDA MANAGER */
+  .agenda-section { margin-bottom: 28px; }
+
+  .agenda-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: var(--text2);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .agenda-section-title svg { width: 16px; height: 16px; fill: var(--gold); }
+
+  .weekdays-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .weekday-btn {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .weekday-btn .wd-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .weekday-btn .wd-status { font-size: 12px; display: block; }
+  .weekday-btn.available { border-color: var(--success); background: rgba(76,175,130,0.08); }
+  .weekday-btn.available .wd-label { color: var(--success); }
+  .weekday-btn.available .wd-status { color: var(--success); }
+  .weekday-btn.blocked { border-color: var(--danger); background: rgba(224,80,80,0.06); opacity: 0.65; }
+  .weekday-btn.blocked .wd-label { color: var(--danger); }
+  .weekday-btn.blocked .wd-status { color: var(--danger); }
+
+  .date-block-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .date-block-input {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    flex: 1;
+    min-width: 140px;
+    transition: border-color 0.2s;
+  }
+  .date-block-input:focus { border-color: var(--gold); }
+
+  .btn-block-date {
+    background: var(--danger);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-block-date:hover { opacity: 0.85; }
+
+  .blocked-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .blocked-item {
+    background: var(--bg2);
+    border: 1px solid rgba(224,80,80,0.3);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .blocked-item-date { color: var(--text); font-weight: 500; }
+  .blocked-item-reason { color: var(--text3); font-size: 12px; }
+
+  .btn-remove-block {
+    background: transparent;
+    border: 1px solid rgba(224,80,80,0.4);
+    color: var(--danger);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-remove-block:hover { background: rgba(224,80,80,0.1); }
+
+  .time-block-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .time-slots-manage {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .slot-manage {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+  }
+  .slot-manage.blocked-slot {
+    border-color: rgba(224,80,80,0.5);
+    background: rgba(224,80,80,0.08);
+    color: var(--danger);
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+  .slot-manage:hover { border-color: var(--border-gold); }
+
+  .info-tip {
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  /* MINI CALENDAR PICKER */
+  .mini-cal-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .mini-cal-trigger {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s;
+    min-width: 160px;
+    user-select: none;
+  }
+  .mini-cal-trigger:hover { border-color: var(--border-gold); }
+  .mini-cal-trigger.open { border-color: var(--gold); }
+  .mini-cal-trigger svg { width: 15px; height: 15px; fill: var(--gold); flex-shrink: 0; }
+  .mini-cal-trigger span { flex: 1; }
+
+  .mini-cal-popup {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 200;
+    background: var(--bg2);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius);
+    padding: 14px;
+    width: 280px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    display: none;
+  }
+  .mini-cal-popup.open { display: block; }
+
+  .mini-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .mini-cal-month {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: var(--text);
+  }
+  .mini-cal-nav {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+  .mini-cal-nav:hover { border-color: var(--border-gold); color: var(--gold); }
+  .mini-cal-nav svg { width: 14px; height: 14px; fill: currentColor; }
+
+  .mini-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  .mini-cal-dh {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    padding: 4px 0;
+    letter-spacing: 0.5px;
+  }
+  .mini-cal-day {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text2);
+  }
+  .mini-cal-day:hover:not(.mc-empty):not(.mc-blocked-wd) {
+    background: var(--gold-dim);
+    color: var(--gold);
+  }
+  .mini-cal-day.mc-empty { pointer-events: none; }
+  .mini-cal-day.mc-today { color: var(--gold-light); font-weight: 700; }
+  .mini-cal-day.mc-selected { background: var(--gold); color: #0e0e0e; font-weight: 700; }
+  .mini-cal-day.mc-blocked { background: rgba(224,80,80,0.12); color: var(--danger); }
+  .mini-cal-day.mc-blocked-wd { opacity: 0.25; cursor: default; pointer-events: none; }
+
+  /* RESPONSIVE */
+  /* REVENUE BLUR */
+  .revenue-blur .stat-value {
+    filter: blur(6px);
+    user-select: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+  }
+  .revenue-blur .stat-value:hover { filter: blur(3px); }
+  .revenue-hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+
+  /* AUTO-REFRESH */
+  .refresh-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .refresh-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    display: inline-block;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .last-update { color: var(--text3); font-size: 12px; }
+
+  @media (max-width: 600px) {
+    .appt-card {
+      grid-template-columns: 1fr;
+      padding: 14px;
+      gap: 10px;
+    }
+    .appt-card::before { width: 100%; height: 3px; top: 0; bottom: auto; right: 0; }
+    .appt-time {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+    .appt-time-value { font-size: 26px; }
+    .appt-time-dur, .appt-time-end { display: inline; font-size: 12px; }
+    .appt-time-end { margin-left: 4px; }
+    .appt-right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .appt-actions { flex-wrap: wrap; gap: 6px; }
+    .appt-action-btn { padding: 8px 14px; font-size: 12px; flex: 1; text-align: center; }
+    .wa-btn { padding: 8px 12px; font-size: 12px; }
+    .stats-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .stat-card { padding: 12px 8px; }
+    .stat-value { font-size: 22px; }
+    .stat-label { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-card">
+    <div class="login-icon">
+      <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+    </div>
+    <p class="login-title">Painel <span style="color:var(--gold)">Admin</span></p>
+    <p class="login-sub">Barbearia Gama — Área restrita</p>
+    <div class="login-input-wrap">
+      <input class="login-input" type="password" id="passwordInput" placeholder="Senha" onkeydown="if(event.key==='Enter') doLogin()">
+      <button class="toggle-pass" type="button" onclick="togglePass()" id="togglePassBtn" title="Mostrar/ocultar senha">
+        <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </button>
+    </div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <p class="login-error" id="loginError">Senha incorreta. Tente novamente.</p>
+  </div>
+</div>
+
+<!-- ADMIN SCREEN -->
+<div id="adminScreen" style="display:none;">
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 2v1.5c0 .83.67 1.5 1.5 1.5S10 4.33 10 3.5V2h4v1.5c0 .83.67 1.5 1.5 1.5S17 4.33 17 3.5V2h1a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h1zm5 5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 2c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm.5 2H11v3l2.6 1.56.72-1.18-2.32-1.38V11z"/></svg>
+      </div>
+      <span class="logo-text">Barbearia <span>Gama</span></span>
+    </div>
+    <span class="admin-badge">Painel Admin</span>
+    <button class="logout-btn" onclick="doLogout()">
+      <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      Sair
+    </button>
+  </header>
+
+  <!-- REFRESH BAR -->
+  <div class="refresh-bar">
+    <div><span class="refresh-dot"></span>Atualizando automaticamente a cada 30s</div>
+    <div class="last-update" id="lastUpdate">—</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-agenda" onclick="switchTab('agenda')">
+      <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+      Agendamentos
+    </button>
+    <button class="tab-btn" id="tab-gestao" onclick="switchTab('gestao')">
+      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      Gestão de Agenda
+    </button>
+  </div>
+
+  <div class="container">
+
+    <!-- TAB: AGENDAMENTOS -->
+    <div class="tab-panel active" id="panel-agenda">
+
+    <!-- DATE NAV -->
+    <div class="date-nav">
+      <div class="date-nav-title" id="dateTitle">Agendamentos de <span>Hoje</span></div>
+      <button class="today-btn" onclick="goToday()">Hoje</button>
+      <div class="date-btn" onclick="changeDay(-1)">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </div>
+      <input type="date" class="date-input" id="dateInput" onchange="onDateChange()">
+      <div class="date-btn" onclick="changeDay(1)">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-label">Agendamentos</div>
+      </div>
+      <div class="stat-card revenue-blur" id="revenueCard" onclick="toggleRevenue()" style="cursor:pointer;">
+        <div class="stat-value" id="statRevenue">—</div>
+        <div class="stat-label">Receita Prevista</div>
+        <div class="revenue-hint" id="revenueHint">Toque para ver</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statNext">—</div>
+        <div class="stat-label">Próximo</div>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="section-header">
+      <span class="section-title">Lista do Dia</span>
+      <span class="count-badge" id="countBadge">0 agendamentos</span>
+    </div>
+
+    <div class="appointments-list" id="appointmentsList">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <div>Carregando agendamentos...</div>
+      </div>
+    </div>
+
+    </div><!-- end panel-agenda -->
+
+    <!-- TAB: GESTÃO DE AGENDA -->
+    <div class="tab-panel" id="panel-gestao">
+
+      <!-- DIAS DA SEMANA -->
+      <div class="agenda-section">
+        <div class="agenda-section-title">
+          <svg viewBox="0 0 24 24"><path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM5 22h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2zm0-16h14v2H5V6z"/></svg>
+          Dias da Semana
+        </div>
+        <p class="info-tip">Clique em um dia para ativar ou bloquear. Configuração padrão do Naldo.</p>
+        <div class="weekdays-grid" id="weekdaysGrid"></div>
+      </div>
+
+      <!-- BLOQUEAR DATA ESPECÍFICA -->
+      <div class="agenda-section">
+        <div class="agenda-section-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          Bloquear Data Específica
+        </div>
+        <p class="info-tip">Bloqueie um dia específico por folga, feriado ou outro motivo.</p>
+        <div class="date-block-row">
+          <div class="mini-cal-wrap" id="blockCalWrap">
+            <div class="mini-cal-trigger" id="blockCalTrigger" onclick="toggleMiniCal('block')">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              <span id="blockCalLabel">Selecionar data</span>
+            </div>
+            <div class="mini-cal-popup" id="blockCalPopup">
+              <div class="mini-cal-header">
+                <div class="mini-cal-nav" onclick="miniCalNav('block',-1)"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></div>
+                <div class="mini-cal-month" id="blockCalMonth"></div>
+                <div class="mini-cal-nav" onclick="miniCalNav('block',1)"><svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+              </div>
+              <div class="mini-cal-grid" id="blockCalGrid"></div>
+            </div>
+          </div>
+          <input type="hidden" id="blockDateInput">
+          <input type="text" class="date-block-input" id="blockReasonInput" placeholder="Motivo (opcional)" style="max-width:200px;">
+          <button class="btn-block-date" onclick="blockSpecificDate()">Bloquear dia</button>
+        </div>
+        <div class="blocked-list" id="blockedDatesList"></div>
+      </div>
+
+      <!-- BLOQUEAR HORÁRIOS -->
+      <div class="agenda-section">
+        <div class="agenda-section-title">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+          Bloquear Horários
+        </div>
+        <p class="info-tip">Selecione uma data e toque nos horários para bloquear ou liberar individualmente.</p>
+        <div class="time-block-row">
+          <div class="mini-cal-wrap" id="slotCalWrap">
+            <div class="mini-cal-trigger" id="slotCalTrigger" onclick="toggleMiniCal('slot')">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              <span id="slotCalLabel">Selecionar data</span>
+            </div>
+            <div class="mini-cal-popup" id="slotCalPopup">
+              <div class="mini-cal-header">
+                <div class="mini-cal-nav" onclick="miniCalNav('slot',-1)"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></div>
+                <div class="mini-cal-month" id="slotCalMonth"></div>
+                <div class="mini-cal-nav" onclick="miniCalNav('slot',1)"><svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+              </div>
+              <div class="mini-cal-grid" id="slotCalGrid"></div>
+            </div>
+          </div>
+          <input type="hidden" id="slotDateInput">
+        </div>
+        <div class="time-slots-manage" id="slotsManager">
+          <div style="grid-column:1/-1;color:var(--text3);font-size:13px;padding:16px 0;">Selecione uma data acima.</div>
+        </div>
+      </div>
+
+      <!-- SERVIÇOS -->
+      <div class="agenda-section">
+        <div class="agenda-section-title">
+          <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm4 0h14v-2H7v2zM3 7h14V5H3v2zm0 10h14v-2H3v2z"/></svg>
+          Serviços
+        </div>
+        <p class="info-tip">Cadastre, edite e remova serviços oferecidos.</p>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
+          <input type="hidden" id="serviceIdInput">
+          <input type="text" class="date-block-input" id="serviceNameInput" placeholder="Nome do serviço" style="max-width:240px;">
+          <input type="number" class="date-block-input" id="serviceDurationInput" placeholder="Duração (min)" style="max-width:140px;">
+          <input type="number" step="0.01" class="date-block-input" id="servicePriceInput" placeholder="Preço (R$)" style="max-width:140px;">
+          <button class="btn-block-date" id="serviceAddBtn" onclick="addOrUpdateService()">Adicionar</button>
+          <button class="btn-block-date" id="serviceCancelBtn" onclick="resetServiceForm()" style="display:none;background:transparent;border:1px solid var(--border);color:var(--text3);">Cancelar</button>
+        </div>
+        <div id="servicesList"></div>
+      </div>
+
+    </div><!-- end panel-gestao -->
+
+  </div><!-- end container -->
+</div><!-- end adminScreen -->
+
+<!-- FEEDBACK MODAL -->
+<div id="feedbackModal" style="display:none;">
+  <div class="modal-overlay" onclick="closeFeedbackModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      </div>
+      <div class="modal-title">Atendimento Concluído!</div>
+      <div class="modal-sub">Deseja enviar uma mensagem de agradecimento e pedir avaliação?</div>
+      <div class="modal-client" id="modalClientInfo">—</div>
+      <div class="modal-actions">
+        <a id="modalFeedbackBtn" class="modal-btn-feedback" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z M5.5 22C3.57 22 2 20.43 2 18.5L2 5.5C2 3.57 3.57 2 5.5 2L18.5 2C20.43 2 22 3.57 22 5.5L22 18.5C22 20.43 20.43 22 18.5 22L5.5 22Z"/></svg>
+          Enviar pelo WhatsApp
+        </a>
+        <button class="modal-btn-skip" onclick="closeFeedbackModal()">Agora não</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COPYRIGHT -->
+<div style="text-align:center; padding: 20px; border-top: 1px solid var(--border); margin-top: 20px;">
+  <span style="font-size:11px; color:var(--text3); letter-spacing:0.5px;">© 2026 LucasScripts · Todos os direitos reservados · Feito com amor e muito café</span>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+/* ── CONFIG ── */
+const ADMIN_PASSWORD = 'gama2024';
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyB9bv37sJqqyVuQPPKK1MynZg7SYMIcN9w",
+  authDomain:        "barbearia-gama-12841.firebaseapp.com",
+  projectId:         "barbearia-gama-12841",
+  storageBucket:     "barbearia-gama-12841.firebasestorage.app",
+  messagingSenderId: "440696636057",
+  appId:             "1:440696636057:web:cc61faca6f0178251c6e08",
+  measurementId:     "G-MBNLC12KXB"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const MONTHS_PT = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const DAYS_PT   = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+
+let currentDate = new Date();
+currentDate.setHours(0,0,0,0);
+
+/* ── TOGGLE PASSWORD ── */
+function togglePass() {
+  const input = document.getElementById('passwordInput');
+  const icon  = document.getElementById('eyeIcon');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+  } else {
+    input.type = 'password';
+    icon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+  }
+}
+
+/* ── SESSION ── */
+function doLogin() {
+  const val = document.getElementById('passwordInput').value;
+  if (val === ADMIN_PASSWORD) {
+    localStorage.setItem('gama_admin_auth', '1');
+    showAdmin();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+function doLogout() {
+  localStorage.removeItem('gama_admin_auth');
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('passwordInput').value = '';
+}
+
+function showAdmin() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminScreen').style.display = 'block';
+  initAdmin();
+}
+
+/* ── REVENUE TOGGLE ── */
+let revenueVisible = false;
+function toggleRevenue() {
+  revenueVisible = !revenueVisible;
+  const card = document.getElementById('revenueCard');
+  const hint = document.getElementById('revenueHint');
+  if (revenueVisible) {
+    card.classList.remove('revenue-blur');
+    hint.textContent = 'Toque para ocultar';
+  } else {
+    card.classList.add('revenue-blur');
+    hint.textContent = 'Toque para ver';
+  }
+}
+
+/* ── DATE HELPERS ── */
+function dateKey(d) {
+  return d.toISOString().split('T')[0];
+}
+
+function formatDateTitle(d) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const tomorrow = new Date(today); tomorrow.setDate(today.getDate()+1);
+  const yesterday = new Date(today); yesterday.setDate(today.getDate()-1);
+  if (d.getTime() === today.getTime()) return `Agendamentos de <span>Hoje</span>`;
+  if (d.getTime() === tomorrow.getTime()) return `Agendamentos de <span>Amanhã</span>`;
+  if (d.getTime() === yesterday.getTime()) return `Agendamentos de <span>Ontem</span>`;
+  const day = DAYS_PT[d.getDay()];
+  return `<span>${day.charAt(0).toUpperCase()+day.slice(1)}</span>, ${d.getDate()} de ${MONTHS_PT[d.getMonth()]}`;
+}
+
+function goToday() {
+  currentDate = new Date(); currentDate.setHours(0,0,0,0);
+  syncDateInput();
+  loadAppointments();
+}
+
+function changeDay(dir) {
+  currentDate.setDate(currentDate.getDate() + dir);
+  syncDateInput();
+  loadAppointments();
+}
+
+function onDateChange() {
+  const val = document.getElementById('dateInput').value;
+  if (!val) return;
+  const parts = val.split('-');
+  currentDate = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+  loadAppointments();
+}
+
+function syncDateInput() {
+  document.getElementById('dateInput').value = dateKey(currentDate);
+}
+
+/* ── NEXT APPOINTMENT ── */
+function getNextAppt(appointments) {
+  const now = new Date();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const isToday = currentDate.getTime() === today.getTime();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+
+  const upcoming = appointments
+    .filter(a => a.status === 'confirmado')
+    .filter(a => {
+      if (!isToday) return true; // dia futuro: mostra o primeiro confirmado
+      const [h,m] = a.time.split(':').map(Number);
+      return h*60+m >= nowMin;
+    })
+    .sort((a,b) => a.time.localeCompare(b.time));
+  return upcoming[0] || null;
+}
+
+/* ── LOAD APPOINTMENTS ── */
+async function loadAppointments(silent = false) {
+  document.getElementById('dateTitle').innerHTML = formatDateTitle(currentDate);
+
+  const list = document.getElementById('appointmentsList');
+  if (!silent) {
+    list.innerHTML = `<div class="loading-state"><div class="spinner"></div><div>Carregando...</div></div>`;
+    document.getElementById('statTotal').textContent = '—';
+    document.getElementById('statRevenue').textContent = '—';
+    document.getElementById('statNext').textContent = '—';
+    document.getElementById('countBadge').textContent = '0 agendamentos';
+  }
+
+  try {
+    const snap = await db.collection('agendamentos')
+      .where('dateKey', '==', dateKey(currentDate))
+      .get();
+
+    const appointments = [];
+    snap.forEach(doc => appointments.push({ id: doc.id, ...doc.data() }));
+
+    appointments.sort((a,b) => a.time.localeCompare(b.time));
+
+    /* Stats */
+    const confirmed = appointments.filter(a => a.status !== 'cancelado');
+    const revenue = confirmed.reduce((s,a) => s + (a.price || 0), 0);
+    const next = getNextAppt(appointments);
+
+    document.getElementById('statTotal').textContent = confirmed.length;
+    document.getElementById('statRevenue').textContent = `R$${revenue}`;
+    document.getElementById('statNext').textContent = next ? next.time : '—';
+    document.getElementById('countBadge').textContent = `${appointments.length} agendamento${appointments.length !== 1 ? 's' : ''}`;
+
+    if (appointments.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📅</div>
+          <div class="empty-title">Nenhum agendamento</div>
+          <div class="empty-sub">Não há agendamentos para este dia.</div>
+        </div>`;
+      return;
+    }
+
+    list.innerHTML = appointments.map(a => renderCard(a)).join('');
+    const now2 = new Date();
+    document.getElementById('lastUpdate').textContent = `Última atualização: ${now2.getHours().toString().padStart(2,'0')}:${now2.getMinutes().toString().padStart(2,'0')}:${now2.getSeconds().toString().padStart(2,'0')}`;
+
+  } catch(e) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-title">Erro ao carregar</div><div class="empty-sub">${e.message}</div></div>`;
+  }
+}
+
+/* ── CALC END TIME ── */
+function calcEndTime(time, duration) {
+  const [h, m] = time.split(':').map(Number);
+  const total = h * 60 + m + duration;
+  const eh = Math.floor(total / 60);
+  const em = total % 60;
+  return `até ${String(eh).padStart(2,'0')}:${String(em).padStart(2,'0')}`;
+}
+
+/* ── RENDER CARD ── */
+function renderCard(a) {
+  const now = new Date();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const isToday = currentDate.getTime() === today.getTime();
+  const [ah, am] = a.time.split(':').map(Number);
+  const apptEnd = ah * 60 + am + (a.duration || 30);
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const isPast = isToday && apptEnd <= nowMin && a.status === 'confirmado';
+  const effectiveStatus = isPast ? 'concluido' : a.status;
+  const statusClass = effectiveStatus === 'concluido' ? 'done' : effectiveStatus === 'cancelado' ? 'cancelled' : '';
+  const statusLabel = effectiveStatus.charAt(0).toUpperCase() + effectiveStatus.slice(1);
+  const statusBadge = `<span class="status-badge status-${effectiveStatus}">${statusLabel}</span>`;
+
+  const waPhone = a.clientPhone ? a.clientPhone.replace(/\D/g,'') : '';
+
+  const agendUrl = 'https://barbearia-gama-agenda.web.app';
+  let waText = '';
+  if (a.status === 'cancelado') {
+    waText = `Ola ${a.clientName}! Passando para informar que seu agendamento na *Barbearia Gama* foi *cancelado*.\n\n*Servico:* ${a.serviceName}\n*Data:* ${a.dateLabel}\n*Horario:* ${a.time}\n*Codigo:* ${a.code}\n\nSentimos muito pelo inconveniente. Para remarcar, acesse nosso link de agendamento ou entre em contato conosco.`;
+  } else if (effectiveStatus === 'concluido') {
+    waText = `Ola ${a.clientName}! Aqui e o Naldo da *Barbearia Gama*. Foi um prazer te atender!\n\n*${a.serviceName}* - ${a.time}\n\nSua opiniao e muito importante para nos. Como foi sua experiencia? Nos deixe uma avaliacao:\n\n⭐⭐⭐⭐⭐\n\nPara agendar novamente:\n${agendUrl}\n\nObrigado pela preferencia! Ate a proxima. ✂`;
+  } else {
+    waText = `Ola ${a.clientName}! Confirmando seu agendamento na *Barbearia Gama*:\n\n*${a.serviceName}* com Naldo Gama\n*Data:* ${a.dateLabel}\n*Horario:* ${a.time}\n*Codigo:* ${a.code}\n\nAguardamos voce!`;
+  }
+
+  const waMsg = encodeURIComponent(waText);
+  const waLink = waPhone ? `https://wa.me/55${waPhone}?text=${waMsg}` : '#';
+
+  let waLabel, waBtnStyle, waIconStyle;
+  if (a.status === 'cancelado') {
+    waLabel = 'Cancelamento';
+    waBtnStyle = 'background:rgba(224,80,80,0.12);border-color:rgba(224,80,80,0.4);color:var(--danger);';
+    waIconStyle = 'fill:var(--danger)';
+  } else if (effectiveStatus === 'concluido') {
+    waLabel = 'Avaliacao';
+    waBtnStyle = 'background:rgba(200,150,46,0.1);border-color:rgba(200,150,46,0.4);color:var(--gold-light);';
+    waIconStyle = 'fill:var(--gold)';
+  } else {
+    waLabel = 'WhatsApp';
+    waBtnStyle = '';
+    waIconStyle = 'fill:#25D366';
+  }
+
+  const actions = effectiveStatus === 'confirmado' ? `
+    <div class="appt-actions">
+      <button class="appt-action-btn done-btn" onclick="markDone('${a.id}','${(a.clientName||'').replace(/'/g,'')}','${(a.clientPhone||'')}','${a.serviceName}','${a.dateLabel}','${a.time}')">Concluído</button>
+      <button class="appt-action-btn cancel-btn" onclick="updateStatus('${a.id}','cancelado')">Cancelar</button>
+    </div>` : '';
+
+  return `
+    <div class="appt-card ${statusClass}" id="card-${a.id}">
+      <div class="appt-time">
+        <div class="appt-time-value">${a.time}</div>
+        <div class="appt-time-dur">${a.duration} min</div>
+        <div class="appt-time-end">${calcEndTime(a.time, a.duration)}</div>
+      </div>
+      <div class="appt-info">
+        <div class="appt-client">${a.clientName}</div>
+        <div class="appt-service">${a.serviceName}</div>
+        <div class="appt-meta">
+          <span class="appt-meta-item">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            ${a.clientPhone}
+          </span>
+          ${statusBadge}
+        </div>
+        ${actions}
+      </div>
+      <div class="appt-right">
+        <div class="appt-price">R$ ${a.price}</div>
+        <div class="appt-code">${a.code}</div>
+        <a class="wa-btn" href="${waLink}" target="_blank" style="${waBtnStyle}">
+          <svg viewBox="0 0 24 24" style="${waIconStyle}"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z M5.5 22C3.57 22 2 20.43 2 18.5L2 5.5C2 3.57 3.57 2 5.5 2L18.5 2C20.43 2 22 3.57 22 5.5L22 18.5C22 20.43 20.43 22 18.5 22L5.5 22Z"/></svg>
+          ${waLabel}
+        </a>
+      </div>
+    </div>`;
+}
+
+/* ── UPDATE STATUS ── */
+async function updateStatus(id, status) {
+  try {
+    await db.collection('agendamentos').doc(id).update({ status });
+    loadAppointments();
+  } catch(e) {
+    alert('Erro ao atualizar: ' + e.message);
+  }
+}
+
+async function markDone(id, clientName, clientPhone, serviceName, dateLabel, time) {
+  try {
+    await db.collection('agendamentos').doc(id).update({ status: 'concluido' });
+    loadAppointments();
+  } catch(e) {
+    alert('Erro ao atualizar: ' + e.message);
+    return;
+  }
+
+  // Show feedback modal
+  const phone = clientPhone ? clientPhone.replace(/\D/g,'') : '';
+  const agendUrl = 'https://barbearia-gama-agenda.web.app';
+  const stars = '⭐⭐⭐⭐⭐';
+
+  const msg = encodeURIComponent(
+    `Ola ${clientName}! Aqui e o Naldo da *Barbearia Gama*. ` +
+    `Foi um prazer te atender hoje!\n\n` +
+    `*${serviceName}* - ${time}\n\n` +
+    `Sua opiniao e muito importante para nos. ` +
+    `Como foi sua experiencia? Nos deixe uma avaliacao:\n\n` +
+    `${stars}\n\n` +
+    `Para agendar novamente:\n${agendUrl}\n\n` +
+    `Obrigado pela preferencia! Ate a proxima. ✂`
+  );
+
+  document.getElementById('modalClientInfo').innerHTML =
+    `<strong>${clientName}</strong> &nbsp;·&nbsp; ${serviceName} &nbsp;·&nbsp; ${time}`;
+  document.getElementById('modalFeedbackBtn').href =
+    phone ? `https://wa.me/55${phone}?text=${msg}` : '#';
+  document.getElementById('feedbackModal').style.display = 'block';
+}
+
+function closeFeedbackModal(event) {
+  if (!event || event.target === event.currentTarget) {
+    document.getElementById('feedbackModal').style.display = 'none';
+  }
+}
+
+/* ── MINI CALENDAR ── */
+const MONTHS_PT_A = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DAYS_PT_A   = ['D','S','T','Q','Q','S','S'];
+
+let miniCals = {
+  block: { year: new Date().getFullYear(), month: new Date().getMonth(), selected: null },
+  slot:  { year: new Date().getFullYear(), month: new Date().getMonth(), selected: null }
+};
+
+function toggleMiniCal(id) {
+  const popup = document.getElementById(id + 'CalPopup');
+  const trigger = document.getElementById(id + 'CalTrigger');
+  const isOpen = popup.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.mini-cal-popup').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.mini-cal-trigger').forEach(t => t.classList.remove('open'));
+  if (!isOpen) {
+    popup.classList.add('open');
+    trigger.classList.add('open');
+    renderMiniCal(id);
+  }
+}
+
+// Close mini cal when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.mini-cal-wrap')) {
+    document.querySelectorAll('.mini-cal-popup').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.mini-cal-trigger').forEach(t => t.classList.remove('open'));
+  }
+});
+
+function miniCalNav(id, dir) {
+  const cal = miniCals[id];
+  cal.month += dir;
+  if (cal.month > 11) { cal.month = 0; cal.year++; }
+  if (cal.month < 0)  { cal.month = 11; cal.year--; }
+  renderMiniCal(id);
+}
+
+function renderMiniCal(id) {
+  const cal = miniCals[id];
+  const now = new Date(); now.setHours(0,0,0,0);
+  const today = now.toISOString().split('T')[0];
+
+  document.getElementById(id + 'CalMonth').textContent = MONTHS_PT_A[cal.month] + ' ' + cal.year;
+
+  const firstDay = new Date(cal.year, cal.month, 1);
+  const lastDay  = new Date(cal.year, cal.month + 1, 0);
+  const startDow = firstDay.getDay();
+  const totalCells = Math.ceil((startDow + lastDay.getDate()) / 7) * 7;
+
+  let html = DAYS_PT_A.map(d => `<div class="mini-cal-dh">${d}</div>`).join('');
+
+  for (let i = 0; i < totalCells; i++) {
+    const dayNum = i - startDow + 1;
+    if (dayNum < 1 || dayNum > lastDay.getDate()) {
+      html += `<div class="mini-cal-day mc-empty"></div>`;
+      continue;
+    }
+    const date = new Date(cal.year, cal.month, dayNum);
+    const dow = date.getDay();
+    const dateStr = `${cal.year}-${String(cal.month+1).padStart(2,'0')}-${String(dayNum).padStart(2,'0')}`;
+    const isToday    = dateStr === today;
+    const isSelected = cal.selected === dateStr;
+    const isBlocked  = blockedDates.find(d => d.date === dateStr);
+
+    let cls = 'mini-cal-day';
+    if (isSelected) cls += ' mc-selected';
+    else if (isBlocked) cls += ' mc-blocked';
+    else if (isToday) cls += ' mc-today';
+
+    html += `<div class="${cls}" onclick="selectMiniCalDate('${id}','${dateStr}')">${dayNum}</div>`;
+  }
+
+  document.getElementById(id + 'CalGrid').innerHTML = html;
+}
+
+function selectMiniCalDate(id, dateStr) {
+  miniCals[id].selected = dateStr;
+  document.getElementById(id + 'DateInput').value = dateStr;
+
+  // Update trigger label
+  const [y,m,d] = dateStr.split('-');
+  const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const date = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
+  document.getElementById(id + 'CalLabel').textContent = `${days[date.getDay()]}, ${d}/${m}/${y}`;
+
+  // Close popup
+  document.getElementById(id + 'CalPopup').classList.remove('open');
+  document.getElementById(id + 'CalTrigger').classList.remove('open');
+
+  // Trigger slot loading if slot calendar
+  if (id === 'slot') loadSlotsManager();
+
+  // Re-render to show selection
+  renderMiniCal(id);
+}
+
+/* ── TAB SWITCH ── */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+  if (tab === 'gestao') loadAgendaManager();
+}
+
+/* ── WEEKDAYS CONFIG ── */
+// 0=Dom 1=Seg 2=Ter 3=Qua 4=Qui 5=Sex 6=Sáb
+// Default: blocked = [0,1,2] (Dom, Seg, Ter)
+const WD_LABELS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+let weekdayConfig = [false, false, false, true, true, true, true]; // true = available
+
+async function loadWeekdayConfig() {
+  if (!db) return;
+  try {
+    const doc = await db.collection('config').doc('weekdays').get();
+    if (doc.exists) weekdayConfig = doc.data().available;
+  } catch(e) {}
+  renderWeekdays();
+}
+
+function renderWeekdays() {
+  const grid = document.getElementById('weekdaysGrid');
+  grid.innerHTML = WD_LABELS.map((label, i) => `
+    <div class="weekday-btn ${weekdayConfig[i] ? 'available' : 'blocked'}" onclick="toggleWeekday(${i})">
+      <span class="wd-label">${label}</span>
+      <span class="wd-status">${weekdayConfig[i] ? '✓' : '✗'}</span>
+    </div>
+  `).join('');
+}
+
+async function toggleWeekday(idx) {
+  weekdayConfig[idx] = !weekdayConfig[idx];
+  renderWeekdays();
+  if (!db) return;
+  try {
+    await db.collection('config').doc('weekdays').set({ available: weekdayConfig });
+  } catch(e) { alert('Erro ao salvar: ' + e.message); }
+}
+
+/* ── BLOCKED SPECIFIC DATES ── */
+let blockedDates = [];
+
+async function loadBlockedDates() {
+  if (!db) return;
+  try {
+    const snap = await db.collection('config').doc('blockedDates').get();
+    blockedDates = snap.exists ? (snap.data().dates || []) : [];
+  } catch(e) {}
+  renderBlockedDates();
+}
+
+function renderBlockedDates() {
+  const list = document.getElementById('blockedDatesList');
+  if (blockedDates.length === 0) {
+    list.innerHTML = '<p class="info-tip">Nenhuma data bloqueada.</p>';
+    return;
+  }
+  list.innerHTML = blockedDates.map((item, i) => `
+    <div class="blocked-item">
+      <div>
+        <div class="blocked-item-date">${formatDateBR(item.date)}</div>
+        ${item.reason ? `<div class="blocked-item-reason">${item.reason}</div>` : ''}
+      </div>
+      <button class="btn-remove-block" onclick="removeBlockedDate(${i})">Remover</button>
+    </div>
+  `).join('');
+}
+
+function formatDateBR(dateStr) {
+  const [y, m, d] = dateStr.split('-');
+  const days = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+  const date = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
+  return `${days[date.getDay()]}, ${d}/${m}/${y}`;
+}
+
+async function blockSpecificDate() {
+  const dateVal = document.getElementById('blockDateInput').value;
+  const reason  = document.getElementById('blockReasonInput').value.trim();
+  if (!dateVal) { alert('Selecione uma data.'); return; }
+  if (blockedDates.find(d => d.date === dateVal)) { alert('Esta data já está bloqueada.'); return; }
+  blockedDates.push({ date: dateVal, reason });
+  blockedDates.sort((a,b) => a.date.localeCompare(b.date));
+  renderBlockedDates();
+  document.getElementById('blockDateInput').value = '';
+  document.getElementById('blockReasonInput').value = '';
+  if (!db) return;
+  try {
+    await db.collection('config').doc('blockedDates').set({ dates: blockedDates });
+  } catch(e) { alert('Erro ao salvar: ' + e.message); }
+}
+
+async function removeBlockedDate(idx) {
+  blockedDates.splice(idx, 1);
+  renderBlockedDates();
+  if (!db) return;
+  try {
+    await db.collection('config').doc('blockedDates').set({ dates: blockedDates });
+  } catch(e) { alert('Erro ao salvar: ' + e.message); }
+}
+
+/* ── BLOCKED SLOTS ── */
+let blockedSlots = {};
+
+async function loadSlotsManager() {
+  const dateVal = document.getElementById('slotDateInput').value || miniCals['slot'].selected;
+  if (!dateVal) return;
+  const grid = document.getElementById('slotsManager');
+  grid.innerHTML = '<div style="grid-column:1/-1;color:var(--text3);font-size:13px;padding:8px 0;">Carregando...</div>';
+
+  if (db) {
+    try {
+      const doc = await db.collection('config').doc('blockedSlots-' + dateVal).get();
+      blockedSlots[dateVal] = doc.exists ? (doc.data().slots || []) : [];
+    } catch(e) { blockedSlots[dateVal] = []; }
+  }
+
+  // Generate all slots for the day
+  const allSlots = [];
+  const periods = [
+    { startH:8, startM:0, endH:12, endM:0 },
+    { startH:14, startM:0, endH:19, endM:30 }
+  ];
+  for (const p of periods) {
+    let h = p.startH, m = p.startM;
+    while (true) {
+      const slotMin = h*60+m;
+      if (slotMin >= p.endH*60+p.endM) break;
+      allSlots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+      m += 30; if (m >= 60) { h++; m -= 60; }
+    }
+  }
+
+  grid.innerHTML = allSlots.map(slot => {
+    const isBlocked = (blockedSlots[dateVal] || []).includes(slot);
+    return `<div class="slot-manage ${isBlocked ? 'blocked-slot' : ''}" onclick="toggleSlot('${dateVal}','${slot}')">${slot}</div>`;
+  }).join('');
+}
+
+async function toggleSlot(dateVal, slot) {
+  if (!blockedSlots[dateVal]) blockedSlots[dateVal] = [];
+  const idx = blockedSlots[dateVal].indexOf(slot);
+  if (idx === -1) blockedSlots[dateVal].push(slot);
+  else blockedSlots[dateVal].splice(idx, 1);
+
+  // Re-render
+  document.querySelectorAll('.slot-manage').forEach(el => {
+    if (el.textContent === slot) {
+      el.classList.toggle('blocked-slot', blockedSlots[dateVal].includes(slot));
+    }
+  });
+
+  if (!db) return;
+  try {
+    await db.collection('config').doc('blockedSlots-' + dateVal).set({ slots: blockedSlots[dateVal] });
+  } catch(e) { alert('Erro ao salvar: ' + e.message); }
+}
+
+/* ── LOAD AGENDA MANAGER ── */
+async function loadAgendaManager() {
+  await Promise.all([loadWeekdayConfig(), loadBlockedDates(), loadServices()]);
+}
+
+/* ── SERVIÇOS (CRUD) ── */
+// Serviços padrão (mesmo que em index.html)
+const DEFAULT_SERVICES = [
+  { id: 'cortemaquina',     name: 'Corte Máquina',        price: 20,  duration: 30 },
+  { id: 'maquinatesoura',   name: 'Máquina + Tesoura',    price: 22,  duration: 40 },
+  { id: 'degrade',          name: 'Degradê',              price: 22,  duration: 40 },
+  { id: 'degradenavalhado', name: 'Degradê Navalhado',    price: 25,  duration: 50 },
+  { id: 'cortebarba',       name: 'Corte + Barba',        price: 35,  duration: 60 },
+  { id: 'barba',            name: 'Barba',                price: 14,  duration: 30 },
+  { id: 'perfil',           name: 'Perfil',               price: 7,   duration: 25 },
+  { id: 'sobrancelha',      name: 'Sobrancelha',          price: 7,   duration: 20 },
+  { id: 'luzes',            name: 'Luzes',                price: 40,  duration: 70 },
+  { id: 'cortetesoura',     name: 'Corte na Tesoura',     price: 25,  duration: 40 },
+  { id: 'riscos',           name: 'Riscos',               price: 2,   duration: 25 }
+];
+
+let services = [];
+
+async function loadServices() {
+  services = [];
+  const remote = [];
+  
+  if (db) {
+    try {
+      const snap = await db.collection('services').get();
+      snap.forEach(doc => remote.push({ id: doc.id, ...doc.data() }));
+    } catch (e) { console.error('Erro ao carregar services do Firestore', e); }
+  }
+
+  // Mescla: serviços remotos sobrescrevem os padrões por id
+  const seenIds = new Set();
+  
+  // Adiciona remotos primeiro (eles têm prioridade)
+  remote.forEach(r => {
+    services.push(r);
+    seenIds.add(r.id);
+  });
+  
+  // Adiciona padrões que não estão no Firestore
+  DEFAULT_SERVICES.forEach(d => {
+    if (!seenIds.has(d.id)) {
+      services.push(d);
+    }
+  });
+  
+  renderServices();
+}
+
+function renderServices() {
+  const container = document.getElementById('servicesList');
+  if (!container) return;
+  if (!services.length) {
+    container.innerHTML = '<p class="info-tip">Nenhum serviço cadastrado.</p>';
+    return;
+  }
+  container.innerHTML = services.map(s => `
+    <div class="blocked-item">
+      <div>
+        <div class="blocked-item-date">${s.name} — ${s.duration} min — R$ ${s.price}</div>
+        ${s.description ? `<div class="blocked-item-reason">${s.description}</div>` : ''}
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-remove-block" onclick="editService('${s.id}')">Editar</button>
+        <button class="btn-remove-block" onclick="deleteService('${s.id}')">Remover</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function resetServiceForm() {
+  document.getElementById('serviceIdInput').value = '';
+  document.getElementById('serviceNameInput').value = '';
+  document.getElementById('serviceDurationInput').value = '';
+  document.getElementById('servicePriceInput').value = '';
+  document.getElementById('serviceAddBtn').textContent = 'Adicionar';
+  document.getElementById('serviceCancelBtn').style.display = 'none';
+}
+
+function editService(id) {
+  const s = services.find(x => x.id === id);
+  if (!s) return;
+  document.getElementById('serviceIdInput').value = s.id;
+  document.getElementById('serviceNameInput').value = s.name || '';
+  document.getElementById('serviceDurationInput').value = s.duration || '';
+  document.getElementById('servicePriceInput').value = s.price || '';
+  document.getElementById('serviceAddBtn').textContent = 'Salvar';
+  document.getElementById('serviceCancelBtn').style.display = 'inline-block';
+}
+
+async function addOrUpdateService() {
+  const id = document.getElementById('serviceIdInput').value || '';
+  const name = document.getElementById('serviceNameInput').value.trim();
+  const duration = parseInt(document.getElementById('serviceDurationInput').value || '0', 10);
+  const price = parseFloat(document.getElementById('servicePriceInput').value || '0');
+  if (!name) { alert('Nome do serviço é obrigatório.'); return; }
+  if (!duration || duration <= 0) { alert('Duração inválida.'); return; }
+  const payload = { name, duration, price };
+  
+  try {
+    if (!db) {
+      // offline: update local array only
+      if (id) {
+        const idx = services.findIndex(s => s.id === id);
+        if (idx !== -1) services[idx] = { id, ...payload };
+      } else {
+        const fakeId = 'new-' + Date.now();
+        services.push({ id: fakeId, ...payload });
+      }
+      renderServices(); 
+      resetServiceForm(); 
+      return;
+    }
+    
+    // Online: save to Firestore (using id if provided, otherwise create new)
+    if (id) {
+      // Save existing service (whether default or already in Firestore)
+      await db.collection('services').doc(id).set(payload, { merge: false });
+    } else {
+      // Create new service
+      await db.collection('services').add(payload);
+    }
+    await loadServices();
+    resetServiceForm();
+  } catch (e) { 
+    alert('Erro ao salvar serviço: ' + e.message); 
+  }
+}
+
+async function deleteService(id) {
+  if (!confirm('Remover este serviço?')) return;
+  try {
+    if (db) {
+      await db.collection('services').doc(id).delete();
+      await loadServices();
+    } else {
+      const idx = services.findIndex(s => s.id === id);
+      if (idx !== -1) services.splice(idx,1);
+      renderServices();
+    }
+  } catch (e) { alert('Erro ao remover: ' + e.message); }
+}
+
+/* ── AUTO REFRESH ── */
+let refreshInterval = null;
+
+function startAutoRefresh() {
+  if (refreshInterval) clearInterval(refreshInterval);
+  refreshInterval = setInterval(() => {
+    loadAppointments(true);
+  }, 30000);
+}
+
+/* ── INIT ── */
+function initAdmin() {
+  syncDateInput();
+  loadAppointments();
+  startAutoRefresh();
+}
+
+/* ── CHECK SESSION ON LOAD ── */
+window.addEventListener('load', () => {
+  if (localStorage.getItem('gama_admin_auth') === '1') {
+    showAdmin();
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "site": "barbearia-gama-agenda",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ]
+  }
+}
