@@ -30,6 +30,10 @@ Se precisar publicar novamente, use:
 firebase deploy
 ```
 
+## Link público
+
+O site está publicado em: [https://barbearia-gama-agenda.web.app](https://barbearia-gama-agenda.web.app)
+
 ## Observações
 
 - O projeto usa HTML, CSS e JavaScript puro.
